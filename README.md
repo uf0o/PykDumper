@@ -14,11 +14,10 @@
 * A friendly guide to setup x64 PyKD
  
 ## Installation and Setup 
-1.  Download the latest PyKD x64 dll version [here](https://githomelab.ru/pykd/pykd-ext/-/wikis/Downloads) and copy it to
-   
-   ```
-   C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\winext
-   ```
+1. Download the latest PyKD x64 dll version [here](https://githomelab.ru/pykd/pykd-ext/-/wikis/Downloads) and copy it to:
+     ```
+     C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\winext
+     ```
 2. Verify that you can load it from windbg by getting a similar output
 
    ```
