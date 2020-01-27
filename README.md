@@ -15,7 +15,7 @@
  
 ## Installation and Setup 
 1.  Download the latest PyKD x64 dll version [here](https://githomelab.ru/pykd/pykd-ext/-/wikis/Downloads) and copy it to
-  
+   
    ```
    C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\winext
    ```
@@ -28,7 +28,8 @@
    Type "help", "copyright", "credits" or "license" for more information.
    (InteractiveConsole)
    >>> 
-   ```Make sure that the python interpreter loaded is also x64.
+   ```
+   Make sure that the python interpreter loaded is also x64.
 
 3. Install the pyKD python module by doing the following:
 
