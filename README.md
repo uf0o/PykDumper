@@ -5,7 +5,7 @@
 * Python2.7 x64 on Winodws
 * PyKD x64
 * PyDes
-* WinDBG :)
+* WinDbg :)
 
 
 ## Features
