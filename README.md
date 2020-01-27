@@ -2,7 +2,7 @@
 
 **PykDumper** is mimimkatz inspired PyKD based script that retrieves and decrypt usernames,logonservers and credentials from the lsass process.
 
-* Python2.7 on Winodws
+* Python2.7 x64 on Winodws
 * PyKD x64
 * PyDes
 * WinDBG :)
@@ -10,9 +10,9 @@
 
 ## Features
 
-* Dumps user infos and credentials from lsass
-* A 
-
+* Dumps user infos + credentials from lsass
+* A friendly guide to setup x64 PyKD
+ 
 ## Installation and Setup 
 1.  Download the latest PyKD x64 dll version [here](https://githomelab.ru/pykd/pykd-ext/-/wikis/Downloads) and copy it to
   
