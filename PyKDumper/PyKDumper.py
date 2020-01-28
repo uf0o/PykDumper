@@ -23,7 +23,7 @@ time.sleep(time_interval)
 users_blob = pykd.dbgCommand("!list -x \"dS @$extret+0x90;dS @$extret+0xa0\" poi(lsasrv!LogonSessionList)")
 users_pretty = users_blob.split('\n\n')
 try:
-	first_user_data  = users_pretty[0] # weak this index to access multiple users	
+    first_user_data  = users_pretty[0] # use this index to access multiple users	
 except IndexError:
     print '\n(!) User Data structure ERROR - try reloading the target debugee OS'
     sys.exit()
