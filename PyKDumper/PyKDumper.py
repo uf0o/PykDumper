@@ -4,7 +4,7 @@ import time
 from pyDes import *
 from binascii import unhexlify,hexlify
 
-#.load C:\Users\uf0\Desktop\pykd\pykd.dll
+# .load C:\Users\uf0\Desktop\pykd\pykd.dll
 # !py c:\users\uf0\desktop\lsass.py
 
 time_interval = 0.5
