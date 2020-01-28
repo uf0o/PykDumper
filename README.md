@@ -55,3 +55,6 @@
    0: kd> .load pykd
    0: kd> !py <path to script.py>
    ```
+   
+ ## Blog 
+ https://www.matteomalvica.com/blog/2020/01/20/mimikatz-lsass-dump-windg-pykd/
