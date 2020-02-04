@@ -37,10 +37,8 @@ def main():
         if processName == "lsass.exe":
             eproc = ("%x"% process )
             
-    time_interval = 0.5
-    cmd1 = ".process /i /p /r %s" % eproc
-    print(cmd1)
-    pykd.dbgCommand(cmd1)
+    time_interval = 0.2
+    pykd.dbgCommand(".process /i /p /r %s" % eproc)
     time.sleep(time_interval)
     pykd.go()
     # reload userland modules
