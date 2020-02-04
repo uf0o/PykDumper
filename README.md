@@ -2,7 +2,7 @@
 
 **PykDumper** is mimimkatz inspired PyKD based script that retrieves and decrypt usernames,logonservers and credentials from the lsass process.
 
-* Python2.7 x64 on Winodws
+* Python2.7 OR Python3.6 x64 on Windows (is preferred to have a single Python version installed)
 * PyKD x64
 * PyDes
 * WinDbg :)
@@ -18,7 +18,7 @@
      ```
      C:\Program Files (x86)\Windows Kits\10\Debuggers\x64\winext
      ```
-2. Verify that you can load it from windbg by getting a similar output
+2. Verify that you can load it from windbg by getting a similar output (depending on version)
 
    ```
    0: kd> .load pykd
