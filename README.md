@@ -16,7 +16,11 @@
 
 * Dumps user infos + credentials from lsass
 * A friendly guide to setup x64 PyKD
- 
+
+## To do:
+* AES support
+* further PyKD automation
+
 ## Installation and Setup 
 We are going to cover only Py3 setup here, as Py2 is dead.
 1. Download the latest PyKD x64 dll version [here](https://githomelab.ru/pykd/pykd-ext/-/wikis/Downloads) and copy it to:
