@@ -40,7 +40,6 @@ def main():
             eproc = ("%x"% process )
             
     time_interval = 0.5
-    blob = pykd.dbgCommand("!process 0 0 lsass.exe")
     cmd1 = ".process /i /p /r %s" % eproc
     print(cmd1)
     pykd.dbgCommand(cmd1)
