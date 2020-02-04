@@ -10,14 +10,12 @@ from binascii import unhexlify,hexlify
 
 nt = None
 EPROCESS = None
-ETHREAD = None
 
 def setupGlobalObject():
     global nt, EPROCESS, ETHREAD
     try:
         nt = module("nt")
         EPROCESS = nt.type("_EPROCESS")
-        ETHREAD = nt.type("_ETHREAD")
     except DbgException:
         dprintln("check symbol paths")
 
@@ -74,7 +72,7 @@ def main():
         first_crypto =  unhexlify(first_crypto.replace(" ", "").replace("-",""))
     except binascii.Error:
         error_log()
-      
+        
     print("\n(*) first user's crypto")
     print(hexlify(first_crypto))
 
