@@ -1,6 +1,8 @@
 # PyKDumper
 
 **PykDumper** is mimimkatz inspired PyKD based script that retrieves and decrypt usernames,logonservers and credentials from the lsass process.
+* PyKDumper2.py supports Python2
+* PyKDumper3.py supports Python3
 
 ## Requirements 
 
